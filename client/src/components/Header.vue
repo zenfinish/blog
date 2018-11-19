@@ -55,6 +55,7 @@
             logout() {
                 this.token = null;
                 localStorage.removeItem('token');
+                this.$router.push('/');
             },
         },
     };

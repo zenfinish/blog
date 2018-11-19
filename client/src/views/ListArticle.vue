@@ -30,18 +30,13 @@ export default {
         return {
             articles: [],
             loadingGetArticle: false,
-            token: localStorage.getItem('token'),
+            token: null,
         };
     },
     created: function() {
+        this.token = localStorage.getItem('token');
+        if(!this.token) this.$router.push('/login');
         this.getAllData();
-    },
-    watch: {
-        '$route' (to, from) {
-            if(this.token === null) {
-                console.log('hahah')
-            }
-        },
     },
     methods: {
         getAllData() {
