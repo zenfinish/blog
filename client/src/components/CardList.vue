@@ -6,8 +6,10 @@
                 <p class="card-text">{{ title }}</p>
                 <p class="card-text" v-html="content"></p>
                 <p class="card-text">
-                    <a href="#" class="btn btn-outline-success mr-1" title="Edit" @click="showModalEdit = true"><i class="fa fa-pencil"></i></a>
-                    <a href="#" class="btn btn-outline-danger" title="Delete" @click="showModalDelete = true"><i class="fa fa-trash"></i></a>
+                    <span v-if="ButtonAdmin">
+                        <a href="#" class="btn btn-outline-success mr-1" title="Edit" @click="showModalEdit = true"><i class="fa fa-pencil"></i></a>
+                        <a href="#" class="btn btn-outline-danger" title="Delete" @click="showModalDelete = true"><i class="fa fa-trash"></i></a>
+                    </span>
                 </p>
             </div>
         </div>
@@ -39,7 +41,7 @@ import axios from 'axios';
 
 export default {
     name: 'CardList',
-    props: ['ArticleId', 'title', 'content', 'updatedAt'],
+    props: ['ArticleId', 'title', 'content', 'updatedAt', 'ButtonAdmin'],
     data: function() {
         return {
             showModalDelete: false,
@@ -50,9 +52,9 @@ export default {
             dataArticle: {
                 ArticleId: this.ArticleId,
                 title: this.title,
-                content: this.content
-            }
-        }
+                content: this.content,
+            },
+        };
     },
     components: {
         Modal,

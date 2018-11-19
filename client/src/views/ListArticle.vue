@@ -10,6 +10,7 @@
                 :updatedAt="data.updatedAt"
                 @deleteDone="getAllData"
                 @updateDone="getAllData"
+                :ButtonAdmin="true"
             />
         </div>
     </div>
@@ -17,7 +18,7 @@
 
 <script>
 import CreateArticle from '@/components/ListArticle/CreateArticle.vue';
-import CardList from '@/components/CardList/CardList.vue';
+import CardList from '@/components/CardList.vue';
 import axios from 'axios';
 
 export default {
@@ -29,17 +30,25 @@ export default {
         return {
             articles: [],
             loadingGetArticle: false,
+            token: localStorage.getItem('token'),
         };
     },
     created: function() {
-        this.getAllData()
+        this.getAllData();
+    },
+    watch: {
+        '$route' (to, from) {
+            if(this.token === null) {
+                console.log('hahah')
+            }
+        },
     },
     methods: {
         getAllData() {
             this.loadingGetArticle = true;
             axios({
                 method: 'GET',
-                url: 'http://localhost:3000/articles'
+                url: 'http://localhost:3000/articles',
             })
                 .then(resolve => {
                     this.articles = resolve.data;
@@ -49,6 +58,6 @@ export default {
                     console.log(reject)
                 });
         },
-    }
+    },
 }
 </script>

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import CardList from '@/components/CardList/CardList.vue';
+import CardList from '@/components/CardList.vue';
 import axios from 'axios';
 
 export default {
